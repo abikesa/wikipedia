@@ -1,0 +1,52 @@
+/* custom.css */
+
+:root {
+    --jp-sidebar-width: 300px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .bd-sidebar {
+      width: var(--jp-sidebar-width);
+    }
+  }
+  
+  .bd-sidebar-primary {
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .bd-toc-item > a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .bd-toc-item > a:hover {
+    text-decoration: underline;
+  }
+  
+  .bd-toc-item > ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .bd-toc-item > ul > li > a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .bd-toc-item > ul > li > a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Dropdown menu style */
+  .bd-toc-item > button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .bd-toc-item > button:hover {
+    text-decoration: underline;
+  }
+  

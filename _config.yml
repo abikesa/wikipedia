@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: JAMA Worthy
+title: Like Wikipedia
 copyright: "2025"
 author: Gideon's Son
 logo: https://disabilityhealth.medicine.umich.edu/sites/default/files/images/news/jama%20network%20logo_0.png
@@ -31,3 +31,8 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+# _config.yml
+html:
+  extra_css:
+    - custom.css

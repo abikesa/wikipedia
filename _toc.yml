@@ -1,14 +1,18 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
+# _toc.yml
 format: jb-book
 root: intro
 chapters:
   - file: chapter1
+    sections:
+      - file: chapter1/section1
+      - file: chapter1/section2
+      - file: chapter1/section3
   - file: chapter2
+    sections:
+      - file: chapter2/section1
+      - file: chapter2/section2
+      - file: chapter2/section3
   - file: chapter3
-  - file: chapter4
-  - file: chapter5
-  - file: chapter6
-  - file: chapter7
-  - file: chapter8
+    sections:
+      - file: chapter3/section1
+      - file: chapter3/section2
