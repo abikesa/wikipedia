@@ -2,7 +2,7 @@
 ### Directory Structure
 
 ```sh
-iam/
+like/
 ├── _build/
 │   └── html/
 │       ├── webApp/
