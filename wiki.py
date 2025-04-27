@@ -2,7 +2,8 @@ import os
 import sys
 
 # --- Settings ---
-WIKI_DIR = "your-wiki-repo"
+WIKI_DIR = "."  # Current directory
+INDEX_FILE = "index.html"
 STYLE_DIR = "style"
 JS_DIR = "js"
 IMAGES_DIR = "images"
@@ -69,11 +70,53 @@ def create_article(title):
 
     print(f"✅ Created new article: {filepath}")
 
+    # After creating the article, update TOC
+    update_index(title, filename)
+
+def update_index(title, filename):
+    """Insert a link to the new article into index.html if not already present."""
+    if not os.path.exists(INDEX_FILE):
+        print(f"⚠️ Warning: {INDEX_FILE} not found. Skipping TOC update.")
+        return
+
+    with open(INDEX_FILE, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    toc_start = None
+    toc_end = None
+
+    # Find where the <ul> for navigation exists
+    for i, line in enumerate(lines):
+        if "<ul>" in line and toc_start is None:
+            toc_start = i
+        if "</ul>" in line and toc_start is not None:
+            toc_end = i
+            break
+
+    if toc_start is None or toc_end is None:
+        print("⚠️ Warning: Could not find TOC in index.html.")
+        return
+
+    # Check if link already exists
+    new_link = f'    <li><a href="{filename}">{title}</a></li>\n'
+    if new_link in lines[toc_start:toc_end]:
+        print("ℹ️ Link already exists in TOC.")
+        return
+
+    # Insert new link just before </ul>
+    lines.insert(toc_end, new_link)
+
+    # Rewrite the file
+    with open(INDEX_FILE, "w", encoding="utf-8") as f:
+        f.writelines(lines)
+
+    print(f"✅ Added link to {filename} in {INDEX_FILE}")
+
 def show_help():
     print("Wiki CLI Usage:")
-    print("  python wiki.py create \"Article Title\"")
+    print("  python3 wiki.py create \"Article Title\"")
     print("Example:")
-    print("  python wiki.py create \"Theory of Relativity\"")
+    print("  python3 wiki.py create \"Theory of Relativity\"")
 
 # --- Main CLI Execution ---
 

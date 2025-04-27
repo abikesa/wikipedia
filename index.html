@@ -12,7 +12,6 @@
   <h1>MyWiki</h1>
   <nav>
     <a href="index.html">Main Page</a> |
-    <a href="first-article.html">First Article</a> |
     <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
   </nav>
 </header>
@@ -20,11 +19,44 @@
 <main id="content">
   <h2>Welcome to MyWiki</h2>
   <p>This is a placeholder for your landing page content.</p>
+
+  <h2>Search Articles</h2>
+  <input type="text" id="searchInput" placeholder="Type to search..." onkeyup="searchArticles()" style="width:100%;padding:8px;margin-bottom:20px;">
+
+  <h2>Articles</h2>
+  <ul id="articlesList">
+    <li><a href="first-article.html">First Article</a></li>
+    <li><a href="your-article-title.html">Your Article Title</a></li>
+    <li><a href="theory-of-relativity.html">Theory of Relativity</a></li>
+    <li><a href="african-philosophy.html">African Philosophy</a></li>
+    <li><a href="symbolic-logic.html">Symbolic Logic</a></li>
+    <!-- Auto-TOC links will appear here too in future -->
+  </ul>
 </main>
 
 <footer id="bottom-footer">
   <hr>
   <p>Last updated: April 2025 | Powered by MyWiki</p>
 </footer>
+
+<script>
+function searchArticles() {
+    let input = document.getElementById('searchInput');
+    let filter = input.value.toLowerCase();
+    let ul = document.getElementById('articlesList');
+    let li = ul.getElementsByTagName('li');
+
+    for (let i = 0; i < li.length; i++) {
+        let a = li[i].getElementsByTagName('a')[0];
+        let txtValue = a.textContent || a.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
 </body>
 </html>
