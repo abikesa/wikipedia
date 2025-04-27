@@ -1,7 +1,8 @@
-// JavaScript to toggle dark mode
+// js/toggle-darkmode.js
+
 function toggleDarkMode() {
-    document.body.classList.toggle("darkmode");
-    document.getElementById('content').classList.toggle("darkmode");
-    document.getElementById('top-header').classList.toggle("darkmode");
-    document.getElementById('bottom-footer').classList.toggle("darkmode");
-}
+    document.body.classList.toggle('darkmode');
+    document.getElementById('toc').classList.toggle('darkmode');
+    document.getElementById('infobox').classList.toggle('darkmode');
+  }
+  
