@@ -1,0 +1,41 @@
+/* Main CSS for MyWiki */
+body {
+    font-family: "Linux Libertine", "Georgia", serif;
+    background-color: #f8f9fa;
+    color: #202122;
+    margin: 0;
+    padding: 0;
+}
+
+#top-header, #bottom-footer {
+    background-color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+}
+
+#content {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+header nav a {
+    color: #0645ad;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    color: #000;
+}
+
+a {
+    color: #0645ad;
+}

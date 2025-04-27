@@ -1,0 +1,17 @@
+/* Dark Mode CSS for MyWiki */
+body.darkmode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+#content.darkmode {
+    background-color: #1e1e1e;
+}
+
+#top-header.darkmode, #bottom-footer.darkmode {
+    background-color: #1e1e1e;
+}
+
+a.darkmode {
+    color: #8ab4f8;
+}
