@@ -283,3 +283,21 @@ details > summary::-webkit-details-marker {
     font-size: 11px;
   }
 }
+
+/* Header layout */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em; /* increased breathing room */
+  background-color: #f8f9fa;
+  /* border-bottom: 1px solid #a2a9b1; */ /* REMOVE this line */
+  box-shadow: none; /* ensure no shadow too */
+}
+
+/* Small tweak to Login area */
+#login-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5em; /* add a little gap between login and "..." */
+}
