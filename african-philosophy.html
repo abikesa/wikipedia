@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <title>African Philosophy - MyWiki</title>
 
-  <!-- Base Wiki CSS -->
+  <!-- Wiki Base -->
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/darkmode.css">
   <script src="js/toggle-darkmode.js" defer></script>
 
   <style>
-    /* Wiki style body */
+    /* Global styles */
     body {
       font-family: system-ui, sans-serif;
       margin: 0;
@@ -19,7 +19,15 @@
       color: #202122;
     }
 
-    /* Container with margins on desktop */
+    a {
+      color: #0645ad;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout grid */
     #content-wrapper {
       display: flex;
       max-width: 1200px;
@@ -27,7 +35,7 @@
       padding: 1rem;
     }
 
-    /* Table of Contents sidebar */
+    /* Left TOC */
     #toc {
       display: none;
       min-width: 200px;
@@ -40,15 +48,30 @@
       top: 1rem;
     }
 
-    /* Main article content */
+    /* Main article */
     #content {
       flex-grow: 1;
       padding: 1rem;
       background: white;
       border: 1px solid #ccc;
+      margin: 0 1rem;
     }
 
-    /* Superscript references */
+    /* Right infobox */
+    #infobox {
+      display: none;
+      min-width: 250px;
+      max-width: 300px;
+      padding: 1rem;
+      background: #f8f9fa;
+      border: 1px solid #aaa;
+      font-size: 0.9em;
+      position: sticky;
+      top: 1rem;
+      height: fit-content;
+    }
+
+    /* Superscripts */
     sup a {
       text-decoration: none;
       font-size: 0.7em;
@@ -56,53 +79,61 @@
       margin-left: 2px;
     }
 
-    /* Acknowledgments backrefs */
+    /* Acknowledgment backrefs */
     .acknowledgments-list li a {
       text-decoration: none;
       font-size: 0.8em;
     }
 
-    /* Mobile collapsibles */
-    details {
-      margin-bottom: 1em;
+    /* Section styling */
+    .section {
+      margin-bottom: 2rem;
     }
-    summary {
-      font-weight: bold;
+    .section-header {
+      display: flex;
+      align-items: center;
       cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 0.5rem;
+    }
+    .section-header::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 8px;
+      transform: rotate(0deg);
+      transition: transform 0.2s;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .section-header.open::before {
+      transform: rotate(90deg);
+    }
+    .section-content {
+      display: none;
+      padding-left: 1rem;
+    }
+    .section-content.open {
+      display: block;
     }
 
+    /* Responsive Behavior */
     @media (min-width: 800px) {
-      /* On desktop */
-      #toc {
+      #toc, #infobox {
         display: block;
       }
-      details[open] summary::after {
+      .section-header::before {
         content: "";
       }
-      details summary {
+      .section-content {
+        display: block !important;
+        padding-left: 0;
+      }
+      .section-header {
         cursor: default;
       }
-      details[open] > *:not(summary) {
-        display: block;
-      }
-      details > *:not(summary) {
-        display: block;
-      }
-      details summary {
-        list-style: none;
-      }
     }
 
-    /* Link styles */
-    a {
-      color: #0645ad;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Footer */
     footer {
       margin-top: 2rem;
       text-align: center;
@@ -112,16 +143,26 @@
   </style>
 
   <script>
-    // Auto-expand details on desktop
+    // Mobile collapsibles
     document.addEventListener("DOMContentLoaded", function() {
-      if (window.innerWidth >= 800) {
-        document.querySelectorAll("details").forEach(detail => {
-          detail.setAttribute("open", "open");
+      if (window.innerWidth < 800) {
+        document.querySelectorAll(".section-header").forEach(header => {
+          header.addEventListener("click", function() {
+            const content = this.nextElementSibling;
+            const isOpen = content.classList.contains("open");
+            if (isOpen) {
+              content.classList.remove("open");
+              this.classList.remove("open");
+            } else {
+              content.classList.add("open");
+              this.classList.add("open");
+            }
+          });
         });
       }
     });
 
-    // Generate simple TOC
+    // Generate TOC links
     document.addEventListener("DOMContentLoaded", function() {
       const toc = document.getElementById("toc-list");
       document.querySelectorAll("#content h2").forEach(function(h2) {
@@ -146,41 +187,60 @@
 
 <div id="content-wrapper">
 
+  <!-- Left TOC -->
   <nav id="toc">
     <strong>Contents</strong>
     <ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>
   </nav>
 
+  <!-- Main Content -->
   <main id="content">
 
-    <details>
-      <summary><h2>Introduction</h2></summary>
-      <p>Content placeholder for African Philosophy.</p>
-    </details>
+    <div class="section">
+      <div class="section-header">Introduction</div>
+      <div class="section-content">
+        <p>Content placeholder for African Philosophy.</p>
+      </div>
+    </div>
 
-    <details>
-      <summary><h2>Background</h2></summary>
-      <p>Some foundational ideas discussed here are adapted from 
-      <a href="https://abikesa.github.io/book-ukubona/" target="_blank" id="ref1">Ukubona: A Cognitive Interface</a>.<sup><a href="#acknowledgments">[1]</a></sup></p>
-    </details>
+    <div class="section">
+      <div class="section-header">Background</div>
+      <div class="section-content">
+        <p>Some foundational ideas discussed here are adapted from 
+        <a href="https://abikesa.github.io/book-ukubona/" target="_blank" id="ref1">Ukubona: A Cognitive Interface</a>.<sup><a href="#acknowledgments">[1]</a></sup></p>
+      </div>
+    </div>
 
-    <details>
-      <summary><h2>See Also</h2></summary>
-      <ul>
-        <li><a href="index.html">Return to Main Page</a></li>
-      </ul>
-    </details>
+    <div class="section">
+      <div class="section-header">See Also</div>
+      <div class="section-content">
+        <ul>
+          <li><a href="index.html">Return to Main Page</a></li>
+        </ul>
+      </div>
+    </div>
 
-    <details>
-      <summary><h2 id="acknowledgments">Acknowledgments</h2></summary>
-      <ol class="acknowledgments-list">
-        <li>
-          Adapted from <a href="https://abikesa.github.io/book-ukubona/" target="_blank">Ukubona: A Cognitive Interface</a> by Abimereki Muzaale. [<a href="#ref1">↩︎</a>]
-        </li>
-      </ol>
-    </details>
+    <div class="section">
+      <div class="section-header">Acknowledgments</div>
+      <div class="section-content">
+        <ol class="acknowledgments-list">
+          <li>
+            Adapted from <a href="https://abikesa.github.io/book-ukubona/" target="_blank">Ukubona: A Cognitive Interface</a> by Abimereki Muzaale. [<a href="#ref1">↩︎</a>]
+          </li>
+        </ol>
+      </div>
+    </div>
 
   </main>
+
+  <!-- Right Infobox -->
+  <aside id="infobox">
+    <table style="width:100%;">
+      <tr><th style="background:#c8ccd1; padding:0.5em; text-align:center;">African Philosophy</th></tr>
+      <tr><td style="padding:0.5em;">Part of: Philosophy</td></tr>
+      <tr><td style="padding:0.5em;">Focus: Epistemology, Ethics</td></tr>
+    </table>
+  </aside>
 
 </div>
 
