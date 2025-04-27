@@ -3,11 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>African Philosophy - MyWiki</title>
+
+  <!-- Base Wiki CSS -->
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/darkmode.css">
   <script src="js/toggle-darkmode.js" defer></script>
 
   <style>
+    /* Wiki style body */
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #202122;
+    }
+
+    /* Container with margins on desktop */
+    #content-wrapper {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Table of Contents sidebar */
+    #toc {
+      display: none;
+      min-width: 200px;
+      padding: 1rem;
+      font-size: 0.9em;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      height: fit-content;
+      position: sticky;
+      top: 1rem;
+    }
+
+    /* Main article content */
+    #content {
+      flex-grow: 1;
+      padding: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+    }
+
     /* Superscript references */
     sup a {
       text-decoration: none;
@@ -16,16 +56,13 @@
       margin-left: 2px;
     }
 
-    /* Backrefs */
+    /* Acknowledgments backrefs */
     .acknowledgments-list li a {
       text-decoration: none;
       font-size: 0.8em;
     }
 
-    /* Responsive collapsible sections */
-    .section-wrapper {
-      margin-left: 1em;
-    }
+    /* Mobile collapsibles */
     details {
       margin-bottom: 1em;
     }
@@ -35,7 +72,10 @@
     }
 
     @media (min-width: 800px) {
-      /* On desktop, auto-expand details */
+      /* On desktop */
+      #toc {
+        display: block;
+      }
       details[open] summary::after {
         content: "";
       }
@@ -52,10 +92,27 @@
         list-style: none;
       }
     }
+
+    /* Link styles */
+    a {
+      color: #0645ad;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8em;
+      color: #666;
+    }
   </style>
 
   <script>
-    // On desktop, auto-open all details
+    // Auto-expand details on desktop
     document.addEventListener("DOMContentLoaded", function() {
       if (window.innerWidth >= 800) {
         document.querySelectorAll("details").forEach(detail => {
@@ -63,53 +120,74 @@
         });
       }
     });
+
+    // Generate simple TOC
+    document.addEventListener("DOMContentLoaded", function() {
+      const toc = document.getElementById("toc-list");
+      document.querySelectorAll("#content h2").forEach(function(h2) {
+        const id = h2.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+        h2.setAttribute('id', id);
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = h2.textContent;
+        li.appendChild(a);
+        toc.appendChild(li);
+      });
+    });
   </script>
 
 </head>
 <body>
+
 <header id="top-header">
-  <h1>African Philosophy</h1>
-  <nav>
-    <a href="index.html">Main Page</a> |
-    <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
-  </nav>
+  <h1 style="text-align:center; padding:1rem;">African Philosophy</h1>
 </header>
 
-<main id="content" class="section-wrapper">
-  
-  <details>
-    <summary><h2>Introduction</h2></summary>
-    <p>Content placeholder for African Philosophy.</p>
-  </details>
+<div id="content-wrapper">
 
-  <details>
-    <summary><h2>Background</h2></summary>
-    <p>Some foundational ideas discussed here are adapted from 
-      <a href="https://abikesa.github.io/book-ukubona/" target="_blank" id="ref1">Ukubona: A Cognitive Interface</a>.<sup><a href="#acknowledgments">[1]</a></sup>
-    </p>
-  </details>
+  <nav id="toc">
+    <strong>Contents</strong>
+    <ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>
+  </nav>
 
-  <details>
-    <summary><h2>See Also</h2></summary>
-    <ul>
-      <li><a href="index.html">Return to Main Page</a></li>
-    </ul>
-  </details>
+  <main id="content">
 
-  <details>
-    <summary><h2 id="acknowledgments">Acknowledgments</h2></summary>
-    <ol class="acknowledgments-list">
-      <li>
-        Adapted from <a href="https://abikesa.github.io/book-ukubona/" target="_blank">Ukubona: A Cognitive Interface</a> by Abimereki Muzaale. [<a href="#ref1">↩︎</a>]
-      </li>
-    </ol>
-  </details>
+    <details>
+      <summary><h2>Introduction</h2></summary>
+      <p>Content placeholder for African Philosophy.</p>
+    </details>
 
-</main>
+    <details>
+      <summary><h2>Background</h2></summary>
+      <p>Some foundational ideas discussed here are adapted from 
+      <a href="https://abikesa.github.io/book-ukubona/" target="_blank" id="ref1">Ukubona: A Cognitive Interface</a>.<sup><a href="#acknowledgments">[1]</a></sup></p>
+    </details>
 
-<footer id="bottom-footer">
+    <details>
+      <summary><h2>See Also</h2></summary>
+      <ul>
+        <li><a href="index.html">Return to Main Page</a></li>
+      </ul>
+    </details>
+
+    <details>
+      <summary><h2 id="acknowledgments">Acknowledgments</h2></summary>
+      <ol class="acknowledgments-list">
+        <li>
+          Adapted from <a href="https://abikesa.github.io/book-ukubona/" target="_blank">Ukubona: A Cognitive Interface</a> by Abimereki Muzaale. [<a href="#ref1">↩︎</a>]
+        </li>
+      </ol>
+    </details>
+
+  </main>
+
+</div>
+
+<footer>
   <hr>
   <p>Last updated: April 2025 | Powered by MyWiki</p>
 </footer>
+
 </body>
 </html>
