@@ -6,6 +6,65 @@
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/darkmode.css">
   <script src="js/toggle-darkmode.js" defer></script>
+
+  <style>
+    /* Superscript references */
+    sup a {
+      text-decoration: none;
+      font-size: 0.7em;
+      vertical-align: super;
+      margin-left: 2px;
+    }
+
+    /* Backrefs */
+    .acknowledgments-list li a {
+      text-decoration: none;
+      font-size: 0.8em;
+    }
+
+    /* Responsive collapsible sections */
+    .section-wrapper {
+      margin-left: 1em;
+    }
+    details {
+      margin-bottom: 1em;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (min-width: 800px) {
+      /* On desktop, auto-expand details */
+      details[open] summary::after {
+        content: "";
+      }
+      details summary {
+        cursor: default;
+      }
+      details[open] > *:not(summary) {
+        display: block;
+      }
+      details > *:not(summary) {
+        display: block;
+      }
+      details summary {
+        list-style: none;
+      }
+    }
+  </style>
+
+  <script>
+    // On desktop, auto-open all details
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.innerWidth >= 800) {
+        document.querySelectorAll("details").forEach(detail => {
+          detail.setAttribute("open", "open");
+        });
+      }
+    });
+  </script>
+
 </head>
 <body>
 <header id="top-header">
@@ -16,17 +75,36 @@
   </nav>
 </header>
 
-<main id="content">
-  <h2>Introduction</h2>
-  <p>Content placeholder for African Philosophy.</p>
+<main id="content" class="section-wrapper">
+  
+  <details>
+    <summary><h2>Introduction</h2></summary>
+    <p>Content placeholder for African Philosophy.</p>
+  </details>
 
-  <h2>Background</h2>
-  <p>More placeholder text.</p>
+  <details>
+    <summary><h2>Background</h2></summary>
+    <p>Some foundational ideas discussed here are adapted from 
+      <a href="https://abikesa.github.io/book-ukubona/" target="_blank" id="ref1">Ukubona: A Cognitive Interface</a>.<sup><a href="#acknowledgments">[1]</a></sup>
+    </p>
+  </details>
 
-  <h2>See Also</h2>
-  <ul>
-    <li><a href="index.html">Return to Main Page</a></li>
-  </ul>
+  <details>
+    <summary><h2>See Also</h2></summary>
+    <ul>
+      <li><a href="index.html">Return to Main Page</a></li>
+    </ul>
+  </details>
+
+  <details>
+    <summary><h2 id="acknowledgments">Acknowledgments</h2></summary>
+    <ol class="acknowledgments-list">
+      <li>
+        Adapted from <a href="https://abikesa.github.io/book-ukubona/" target="_blank">Ukubona: A Cognitive Interface</a> by Abimereki Muzaale. [<a href="#ref1">↩︎</a>]
+      </li>
+    </ol>
+  </details>
+
 </main>
 
 <footer id="bottom-footer">
