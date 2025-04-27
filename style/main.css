@@ -301,3 +301,14 @@ header {
   align-items: center;
   gap: 0.5em; /* add a little gap between login and "..." */
 }
+
+body {
+  margin: 0;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #202122;
+}
+
+a:hover {
+  text-decoration: underline;
+}
