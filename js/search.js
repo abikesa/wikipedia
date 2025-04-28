@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
   const searchInput = document.querySelector('#search-input');
-  const topics = document.querySelectorAll('.topic');
+  const topicsContainer = document.getElementById('topics-wrapper');
+  const topics = Array.from(document.querySelectorAll('.topic'));
+  const globe = document.getElementById('globe'); // << NEW grab the globe
 
   // Create a "no results" message element
   const noResultsMessage = document.createElement('div');
@@ -19,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
     topicData[baseName] = {
       link: topic,
       iframe: document.getElementById(baseName),
-      content: ''
+      content: '',
+      originalText: topic.innerText,
+      title: topic.innerText.toLowerCase()
     };
   });
 
@@ -46,23 +50,107 @@ document.addEventListener("DOMContentLoaded", function() {
   function enableSearch() {
     searchInput.addEventListener('input', function() {
       const searchTerm = searchInput.value.toLowerCase();
-      let found = false;
+      const results = [];
+      let totalScore = 0; // << NEW total score tracker
 
       iframeKeys.forEach(key => {
-        const { link, content } = topicData[key];
-        if (link.innerText.toLowerCase().includes(searchTerm) || content.includes(searchTerm)) {
-          link.style.display = '';
-          found = true;
-        } else {
-          link.style.display = 'none';
+        const { link, title, content } = topicData[key];
+        let score = 0;
+
+        if (title.includes(searchTerm)) score += 10;
+        if (content.includes(searchTerm)) {
+          const count = content.split(searchTerm).length - 1;
+          score += count;
+        }
+
+        if (searchTerm.trim() === '') score = 1; // Show all if search is empty
+
+        if (score > 0) {
+          results.push({ key, link, score });
+          totalScore += score; // << NEW add to total
         }
       });
 
-      if (!found && searchTerm.trim() !== "") {
+      // Control the globe spin based on totalScore
+      adjustGlobeSpin(totalScore); // << NEW call after scoring
+
+      if (results.length === 0) {
         noResultsMessage.style.display = 'block';
       } else {
         noResultsMessage.style.display = 'none';
+
+        // Sort results
+        results.sort((a, b) => {
+          if (b.score !== a.score) {
+            return b.score - a.score;
+          } else {
+            return a.link.innerText.localeCompare(b.link.innerText);
+          }
+        });
+
+        // Clear container
+        topicsContainer.innerHTML = '';
+
+        // Add matches
+        results.forEach(result => {
+          const { key, link } = result;
+          const data = topicData[key];
+
+          // Reset link text
+          link.innerHTML = data.originalText;
+
+          // Highlight matched text in title
+          if (searchTerm.trim() !== '') {
+            const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
+            link.innerHTML = link.innerHTML.replace(regex, '<mark class="highlight">$1</mark>');
+          }
+
+          topicsContainer.appendChild(link);
+
+          // Add search snippet below link
+          const preview = document.createElement('div');
+          preview.className = 'search-preview';
+          const snippet = extractSnippet(data.content, searchTerm);
+          preview.innerHTML = snippet ? highlightSnippet(snippet, searchTerm) : '';
+          topicsContainer.appendChild(preview);
+        });
       }
     });
+  }
+
+  function adjustGlobeSpin(totalScore) {
+    if (!globe) return;
+    let spinSpeed = Math.max(10, 60 - totalScore * 2); // Adjust spin speed
+    globe.style.animation = `spin ${spinSpeed}s linear infinite`; // << FULL animation reset
+  
+    if (totalScore > 20) {
+      globe.style.filter = 'drop-shadow(0 0 10px #93c5fd)';
+    } else if (totalScore > 5) {
+      globe.style.filter = 'drop-shadow(0 0 5px #93c5fd)';
+    } else {
+      globe.style.filter = 'none';
+    }
+  }
+  
+
+  function getBaseName(href) {
+    return href.substring(href.lastIndexOf('/') + 1, href.lastIndexOf('.'));
+  }
+
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function extractSnippet(content, term) {
+    const index = content.indexOf(term);
+    if (index === -1) return '';
+    const snippetStart = Math.max(0, index - 30);
+    const snippetEnd = Math.min(content.length, index + 70);
+    return content.substring(snippetStart, snippetEnd) + '...';
+  }
+
+  function highlightSnippet(snippet, term) {
+    const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
+    return snippet.replace(regex, '<mark class="highlight">$1</mark>');
   }
 });
