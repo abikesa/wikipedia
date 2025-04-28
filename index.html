@@ -9,41 +9,45 @@
 </head>
 
 <body>
-  <!-- Site name ABOVE centerpiece -->
-  <div id="site-name">Ukubona</div>
-  <div id="site-tagline">The Gateway to Perception</div>
 
-  <!-- Centerpiece -->
-  <div id="centerpiece">
-    <img src="images/ukubona-004.jpg" alt="Ukubona Globe" id="globe">
-  
-    <div id="topics-wrapper">
-      <a href="articles/mythology.html" class="topic" style="--i:0;">Mythology</a>
-      <a href="articles/theory-of-relativity.html" class="topic" style="--i:1;">Epistemology</a>
-      <a href="articles/symbolic-logic.html" class="topic" style="--i:2;">Symbolism</a>
-      <a href="articles/first-article.html" class="topic" style="--i:3;">Architecture</a>
-      <a href="articles/theory-of-relativity.html" class="topic" style="--i:4;">Cognition</a>
-      <a href="articles/your-article-title.html" class="topic" style="--i:5;">Resonance</a>
+  <div id="orb-system">
+
+    <div id="centerpiece">
+      <!-- Ukubona Logo Image at 12 -->
+      <div class="topic-logo" style="--i:0;">
+        <img src="images/ukubona-005.png" alt="Ukubona Logo" id="logo-img">
+        <div id="tagline">The Gateway to Perception</div>
+      </div>
+
+      <!-- Orbital Topics -->
+      <a href="articles/sign.html" class="topic" style="--i:1;">Sign</a>
+      <a href="articles/mind.html" class="topic" style="--i:2;">Mind</a>
+      <a href="articles/wave.html" class="topic" style="--i:3;">Wave</a>
+      <a href="articles/myth.html" class="topic" style="--i:4;">Myth</a>
+      <a href="articles/lens.html" class="topic" style="--i:5;">Lens</a>
+
+      <!-- Search Box at 6 -->
+      <div class="topic-search" style="--i:6;">
+        <input id="search-input" type="text" placeholder="Search Ukubona...">
+      </div>
+
+      <a href="articles/form.html" class="topic" style="--i:7;">Form</a>
+      <a href="articles/path.html" class="topic" style="--i:8;">Path</a>
+      <a href="articles/rift.html" class="topic" style="--i:9;">Rift</a>
+      <a href="articles/echo.html" class="topic" style="--i:10;">Echo</a>
+      <a href="articles/arc.html" class="topic" style="--i:11;">Arc</a>
     </div>
-  </div>
-  
-
-  <!-- Search bar BELOW everything -->
-  <div id="search-bar">
-    <input id="search-input" type="text" placeholder="Search Ukubona...">
 
   </div>
 
-  <!-- Link to the search.js script -->
+  <!-- Scripts and hidden iframes -->
   <script src="js/search.js" defer></script>
 
-  <!-- Hidden Iframes for Searchable Content (place them here) -->
-  <iframe src="articles/mythology.html" style="display:none; border: 1px solid red;" id="mythology"></iframe>
-  <iframe src="articles/theory-of-relativity.html" style="display:none; border: 1px solid red;" id="theory-of-relativity"></iframe>
-  <iframe src="articles/symbolic-logic.html" style="display:none; border: 1px solid red;" id="symbolic-logic"></iframe>
-  <iframe src="articles/first-article.html" style="display:none; border: 1px solid red;" id="first-article"></iframe>
-  <iframe src="articles/your-article-title.html" style="display:none; border: 1px solid red;" id="your-article-title"></iframe>
-  
-  
+  <iframe src="articles/mythology.html" style="display:none;" id="mythology"></iframe>
+  <iframe src="articles/theory-of-relativity.html" style="display:none;" id="theory-of-relativity"></iframe>
+  <iframe src="articles/symbolic-logic.html" style="display:none;" id="symbolic-logic"></iframe>
+  <iframe src="articles/first-article.html" style="display:none;" id="first-article"></iframe>
+  <iframe src="articles/your-article-title.html" style="display:none;" id="your-article-title"></iframe>
+
 </body>
 </html>

@@ -1,162 +1,127 @@
-/* homepage.css - styles for the orb homepage */
-
+/* Body layout */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Linux Libertine', Georgia, Times, serif;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  height: 100vh;
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean professional font */
+  background-color: #f7f7f7;
+  color: #333333; /* Darker text for better contrast */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Orb system wrapper */
+#orb-system {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
   text-align: center;
-  padding-top: 3em;
+  padding: 20px;
 }
 
-body {
-  opacity: 0;
-  animation: fadeIn 1.5s ease forwards;
+/* Ukubona Header */
+#ukubona-header {
+  margin-bottom: 40px; /* Increased space from orb */
 }
 
-/* FadeIn keyframes */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-
-/* Site title */
 #site-name {
-  font-size: 36px;
-  font-weight: 600;
-  margin-bottom: 0.2em;
-  margin-top: -1em; /* bring it closer to 12 o'clock */
+  font-size: 56px; /* Larger for bold, impactful presence */
+  font-weight: 800; /* Even bolder to reflect strength */
+  color: #111111; /* Darker color for the logo for seriousness */
 }
 
-/* Tagline */
 #site-tagline {
-  font-size: 16px;
+  font-size: 18px;
   font-style: italic;
-  color: #cccccc;
-  margin-bottom: 1em;
+  color: #555555; /* Subtle, refined color */
+  margin-top: 6px;
+  letter-spacing: 0.5px;
 }
 
-/* Centerpiece container */
+/* Centerpiece orb */
 #centerpiece {
   position: relative;
-  width: 450px;
-  height: 450px;
+  width: 500px;
+  height: 500px;
+  padding: 40px 0;
 }
 
-/* Globe image */
-#globe {
+/* Logo at 12 o'clock */
+.topic-logo {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height: 200px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  animation: spin 60s linear infinite;
-}
-
-/* Spin animation keyframes */
-@keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
-/* Topic links arranged around a perfect circle */
-.topic {
-  position: absolute;
-  color: #93c5fd;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.3s;
   top: 50%;
   left: 50%;
   transform:
-    rotate(calc(var(--i) * 60deg))
-    translate(200px)
-    rotate(calc(var(--i) * -60deg));
-}
-
-/* Hover effect */
-.topic:hover {
-  color: #ffffff;
-  text-decoration: underline;
-  text-shadow: 0 0 8px #93c5fd, 0 0 12px #ffffff;
-}
-
-
-/* Search bar */
-#search-bar {
-  margin-top: 2em;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-#search-bar input {
-  width: 300px;
-  padding: 0.7em;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
+    rotate(calc(var(--i) * 30deg))
+    translate(220px)
+    rotate(calc(var(--i) * -30deg));
   text-align: center;
 }
 
-/* Highlighted search match style */
-mark.highlight {
-  background-color: rgba(147, 197, 253, 0.4);
-  padding: 0 2px;
-  border-radius: 3px;
-  font-weight: bold;
-  animation: fadeInHighlight 0.5s ease;
+#logo-img {
+  width: 120px; /* Slightly larger for strong visual presence */
+  height: auto;
+  margin-bottom: 12px; /* Space for tagline */
 }
 
-/* Search preview snippet under each topic link */
-.search-preview {
-  font-size: 0.9em;
-  color: #aaa;
+#tagline {
+  font-size: 16px;
   font-style: italic;
+  color: #777777;
   margin-top: 6px;
-  margin-bottom: 14px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  animation: fadeInHighlight 0.5s ease;
-  line-height: 1.4;
+  letter-spacing: 0.5px;
 }
 
-/* Soft divider between articles */
-.topic + .search-preview {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+/* Topics orbiting */
+.topic {
+  position: absolute;
+  color: #1E3A8A; /* Elegant blue tone */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px; /* Larger font for better readability */
+  transition: color 0.3s, transform 0.3s ease;
+  top: 50%;
+  left: 50%;
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translate(220px)
+    rotate(calc(var(--i) * -30deg));
 }
 
-/* Special animation just for search results fade */
-@keyframes fadeInHighlight {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Hover effects for topics */
+.topic:hover {
+  color: #1D4ED8; /* Bright blue on hover for more emphasis */
+  text-decoration: underline;
+  text-shadow: 0 0 8px #93c5fd, 0 0 12px #1D4ED8;
+  transform: scale(1.05); /* Slightly larger on hover for interaction feel */
 }
 
-
-.search-preview {
-  font-size: 0.85em;
-  color: #cccccc;
-  margin-top: 4px;
-  margin-bottom: 12px;
-  animation: fadeInHighlight 0.5s ease;
+/* Search box at 6 o'clock */
+.topic-search {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:
+    rotate(calc(var(--i) * 30deg))
+    translate(220px)
+    rotate(calc(var(--i) * -30deg));
 }
 
-@keyframes fadeInHighlight {
-  from { opacity: 0; }
-  to { opacity: 1; }
+#search-input {
+  width: 250px;
+  padding: 0.75em;
+  border-radius: 12px; /* Softer, more modern feel */
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  color: #333333;
+  text-align: center;
+  font-weight: 500;
+  transition: border-color 0.3s;
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: #2563eb; /* Highlight when focused */
 }
